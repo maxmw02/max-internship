@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+
+import axios from "axios";
 
 const HotCollections = () => {
+  const [nftData, setNftData] = useState([]);
+
+  async function fetchApi() {
+    try {
+      const { data } = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`
+      );
+      setNftData(data || []);
+      console.log(nftData);
+    } catch (error) {
+      console.error("Error fetching api:", error);
+      setNftData([]);
+    }
+  }
+
+  useEffect(() => {
+    fetchApi();
+  }, []);
+
   return (
     <section id="section-collections" className="no-bottom">
       <div className="container">
@@ -19,18 +38,18 @@ const HotCollections = () => {
               <div className="nft_coll">
                 <div className="nft_wrap">
                   <Link to="/item-details">
-                    <img src={nftImage} className="lazy img-fluid" alt="" />
+                    <img src={nftData.nftImage} className="lazy img-fluid" alt="" />
                   </Link>
                 </div>
                 <div className="nft_coll_pp">
                   <Link to="/author">
-                    <img className="lazy pp-coll" src={AuthorImage} alt="" />
+                    <img className="lazy pp-coll" src={nftData.authorImage} alt="" />
                   </Link>
                   <i className="fa fa-check"></i>
                 </div>
                 <div className="nft_coll_info">
                   <Link to="/explore">
-                    <h4>Pinky Ocean</h4>
+                    <h4>{nftData.title}</h4>
                   </Link>
                   <span>ERC-192</span>
                 </div>
