@@ -5,28 +5,10 @@ import Author from "./pages/Author";
 import ItemDetails from "./pages/ItemDetails";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import axios from "axios";
-import { useEffect, useState } from "react";
+
+
 
 function App() {
-  // const [nftData, setNftData] = useState([]);
-
-  // async function fetchApi() {
-  //   try {
-  //     const { data } = await axios.get(
-  //       `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`
-  //     );
-  //     setNftData(data || []);
-  //     console.log(nftData);
-  //   } catch (error) {
-  //     console.error("Error fetching api:", error);
-  //     setNftData([]);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchApi();
-  // }, []);
 
   return (
     <Router>
