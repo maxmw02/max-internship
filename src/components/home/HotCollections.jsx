@@ -9,12 +9,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const HotCollections = () => {
   const [nftData, setNftData] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   async function fetchApi() {
-    setLoading(true);
     try {
-      console.log(loading);
       const { data } = await axios.get(
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`
       );
@@ -23,9 +20,9 @@ const HotCollections = () => {
       console.error("Error fetching api:", error);
       setNftData([]);
     }
-    setLoading(false);
-    console.log(loading);
   }
+
+
 
   useEffect(() => {
     fetchApi();
@@ -62,16 +59,16 @@ const HotCollections = () => {
             </div>
           </div>
           <ReactOwlCarousel className="owl-theme" {...options}>
-            {nftData.map((nftData, index) => (
+            {nftData.map((data, index) => (
               <div key={index}>
                 <div className="nft_coll">
                   <div className="nft_wrap">
-                    {loading ? (
-                      <Skeleton height={"100%"} borderRadius={10}/>
+                    {nftData.length === 0 ? (
+                      <Skeleton height={"100%"} borderRadius={10} />
                     ) : (
                       <Link to="/item-details">
                         <img
-                          src={nftData.nftImage}
+                          src={data.nftImage}
                           className="lazy img-fluid"
                           alt=""
                         />
@@ -79,13 +76,13 @@ const HotCollections = () => {
                     )}
                   </div>
                   <div className="nft_coll_pp">
-                    {loading ? (
-                      <Skeleton circle={true} height={55}/>
+                    {nftData.length === 0 ? (
+                      <Skeleton circle={true} height={55} />
                     ) : (
                       <Link to="/author">
                         <img
                           className="lazy pp-coll"
-                          src={nftData.authorImage}
+                          src={data.authorImage}
                           alt=""
                         />
                       </Link>
@@ -93,14 +90,18 @@ const HotCollections = () => {
                     <i className="fa fa-check"></i>
                   </div>
                   <div className="nft_coll_info">
-                    {loading ? (
-                      <Skeleton width={80}/>
+                    {nftData.length === 0 ? (
+                      <Skeleton width={80} />
                     ) : (
                       <Link to="/explore">
-                        <h4>{nftData.title}</h4>
+                        <h4>{data.title}</h4>
                       </Link>
                     )}
-                    {loading ? <Skeleton width={40}/> : <span>ERC-{nftData.code}</span>}
+                    {nftData.length === 0 ? (
+                      <Skeleton width={40} />
+                    ) : (
+                      <span>ERC-{data.code}</span>
+                    )}
                   </div>
                 </div>
               </div>
