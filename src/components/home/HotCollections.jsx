@@ -8,23 +8,23 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const HotCollections = () => {
-  const [nftData, setNftData] = useState([]);
-  const loading = (nftData.length === 0)
+  const [hotData, setHotData] = useState([]);
+  const loading = (hotData.length === 0)
 
-  async function fetchApi() {
+  async function fetchHotCollections() {
     try {
       const { data } = await axios.get(
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`
       );
-      setNftData(data);
+      setHotData(data);
     } catch (error) {
       console.error("Error fetching api:", error);
-      setNftData([]);
+      setHotData([]);
     }
   }
 
   useEffect(() => {
-    fetchApi();
+    fetchHotCollections();
   }, []);
 
   const options = {
@@ -81,13 +81,13 @@ const HotCollections = () => {
           )}
           {!loading && (
             <ReactOwlCarousel className="owl-theme" {...options}>
-              {nftData.map((nftData, index) => (
+              {hotData.map((hotData, index) => (
                 <div key={index}>
                   <div className="nft_coll">
                     <div className="nft_wrap">
                       <Link to="/item-details">
                         <img
-                          src={nftData.nftImage}
+                          src={hotData.nftImage}
                           className="lazy img-fluid"
                           alt=""
                         />
@@ -97,7 +97,7 @@ const HotCollections = () => {
                       <Link to="/author">
                         <img
                           className="lazy pp-coll"
-                          src={nftData.authorImage}
+                          src={hotData.authorImage}
                           alt=""
                         />
                       </Link>
@@ -105,9 +105,9 @@ const HotCollections = () => {
                     </div>
                     <div className="nft_coll_info">
                       <Link to="/explore">
-                        <h4>{nftData.title}</h4>
+                        <h4>{hotData.title}</h4>
                       </Link>
-                      <span>ERC-{nftData.code}</span>
+                      <span>ERC-{hotData.code}</span>
                     </div>
                   </div>
                 </div>
