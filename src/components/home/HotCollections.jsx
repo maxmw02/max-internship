@@ -22,7 +22,7 @@ const HotCollections = () => {
     }
   }
 
-
+  const loading = (nftData.length === 0)
 
   useEffect(() => {
     fetchApi();
@@ -58,55 +58,62 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <ReactOwlCarousel className="owl-theme" {...options}>
-            {nftData.map((data, index) => (
-              <div key={index}>
-                <div className="nft_coll">
-                  <div className="nft_wrap">
-                    {nftData.length === 0 ? (
+          {loading && (
+            <ReactOwlCarousel className="owl-theme" {...options}>
+              {new Array(4).fill(0).map((_, index) => (
+                <div key={index}>
+                  <div className="nft_coll">
+                    <div className="nft_wrap">
                       <Skeleton height={"100%"} borderRadius={10} />
-                    ) : (
+                    </div>
+                    <div className="nft_coll_pp">
+                      <Skeleton circle={true} height={55} />
+                      <i className="fa fa-check"></i>
+                    </div>
+                    <div className="nft_coll_info">
+                      <Skeleton width={80} />
+                      <Skeleton width={40} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </ReactOwlCarousel>
+          )}
+          {!loading && (
+            <ReactOwlCarousel className="owl-theme" {...options}>
+              {nftData.map((nftData, index) => (
+                <div key={index}>
+                  <div className="nft_coll">
+                    <div className="nft_wrap">
                       <Link to="/item-details">
                         <img
-                          src={data.nftImage}
+                          src={nftData.nftImage}
                           className="lazy img-fluid"
                           alt=""
                         />
                       </Link>
-                    )}
-                  </div>
-                  <div className="nft_coll_pp">
-                    {nftData.length === 0 ? (
-                      <Skeleton circle={true} height={55} />
-                    ) : (
+                    </div>
+                    <div className="nft_coll_pp">
                       <Link to="/author">
                         <img
                           className="lazy pp-coll"
-                          src={data.authorImage}
+                          src={nftData.authorImage}
                           alt=""
                         />
                       </Link>
-                    )}
-                    <i className="fa fa-check"></i>
-                  </div>
-                  <div className="nft_coll_info">
-                    {nftData.length === 0 ? (
-                      <Skeleton width={80} />
-                    ) : (
+                      <i className="fa fa-check"></i>
+                    </div>
+                    <div className="nft_coll_info">
                       <Link to="/explore">
-                        <h4>{data.title}</h4>
+                        <h4>{nftData.title}</h4>
                       </Link>
-                    )}
-                    {nftData.length === 0 ? (
-                      <Skeleton width={40} />
-                    ) : (
-                      <span>ERC-{data.code}</span>
-                    )}
+                      <span>ERC-{nftData.code}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </ReactOwlCarousel>
+              ))}
+            </ReactOwlCarousel>
+          )}
         </div>
       </div>
     </section>
