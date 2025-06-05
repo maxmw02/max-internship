@@ -9,6 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const HotCollections = () => {
   const [nftData, setNftData] = useState([]);
+  const loading = (nftData.length === 0)
 
   async function fetchApi() {
     try {
@@ -21,8 +22,6 @@ const HotCollections = () => {
       setNftData([]);
     }
   }
-
-  const loading = (nftData.length === 0)
 
   useEffect(() => {
     fetchApi();
@@ -48,6 +47,7 @@ const HotCollections = () => {
     dots: false,
     nav: true,
   };
+
   return (
     <section id="section-collections" className="no-bottom">
       <div className="container">
