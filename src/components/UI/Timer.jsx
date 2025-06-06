@@ -14,8 +14,8 @@ const Timer = ({ initialTime }) => {
   }, [seconds]);
 
   const formatTime = (timeLeft) => {
-    const hours = Math.floor(timeLeft / 60 / 60).toString();
-    const minutes = Math.floor(timeLeft / 60).toString();
+    const hours = (Math.floor(timeLeft / 60 / 60) % 24).toString();
+    const minutes = (Math.floor(timeLeft / 60) % 60).toString();
     const seconds = (timeLeft % 60).toString();
     return `${hours}h ${minutes}m ${seconds}s`;
   };
