@@ -9,7 +9,8 @@ const ExploreItems = () => {
   const [exploreData, setExploreData] = useState([]);
   const [sortType, setSortType] = useState("");
   const [displayedExploreData, setDisplayedExploreData] = useState([]);
-  const loading = exploreData.length === 0;
+  const [visibleItems, setVisibleItems] = useState(8)
+  const loading = displayedExploreData.length === 0;
 
   async function fetchExploreData() {
     try {
@@ -23,10 +24,9 @@ const ExploreItems = () => {
     }
   }
 
-
   useEffect(() => {
     let sortedExploreData = [...exploreData];
-
+    
     if (sortType === "price_high_to_low") {
       sortedExploreData.sort((a, b) => {
         const priceA = parseFloat(a.price);
@@ -46,9 +46,14 @@ const ExploreItems = () => {
         return likesB - likesA   
       })
     }
-      setDisplayedExploreData(sortedExploreData);
+    setDisplayedExploreData(sortedExploreData.slice(0, 8));
   }, [exploreData, sortType]);
-
+  
+  const loadMore = () => {
+    setVisibleItems(prev => prev + 4)
+    setDisplayedExploreData(displayedExploreData.slice(0, visibleItems))
+  }
+  
   useEffect(() => {
     fetchExploreData();
   }, []);
@@ -128,9 +133,10 @@ const ExploreItems = () => {
         </div>
       ))}
       <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead">
+        <button to="" id="loadmore" className="btn-main lead" onClick={() => {
+          loadMore()}}>
           Load more
-        </Link>
+        </button>
       </div>
     </>
   );
