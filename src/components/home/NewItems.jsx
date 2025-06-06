@@ -86,8 +86,8 @@ const NewItems = () => {
           )}
           {!loading && (
             <ReactOwlCarousel {...options}>
-              {newData.map((newData, index) => (
-                <div key={index}>
+              {newData.map((newData) => (
+                <div key={newData.id}>
                   <div className="nft__item">
                     <div className="author_list_pp">
                       <Link

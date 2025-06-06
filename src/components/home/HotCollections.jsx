@@ -81,8 +81,8 @@ const HotCollections = () => {
           )}
           {!loading && (
             <ReactOwlCarousel className="owl-theme" {...options}>
-              {hotData.map((hotData, index) => (
-                <div key={index}>
+              {hotData.map((hotData) => (
+                <div key={hotData.id}>
                   <div className="nft_coll">
                     <div className="nft_wrap">
                       <Link to="/item-details">
