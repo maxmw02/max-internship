@@ -8,6 +8,7 @@ import Timer from "../UI/Timer";
 const ExploreItems = () => {
   const [exploreData, setExploreData] = useState([]);
   const [sortType, setSortType] = useState("");
+  const [sortedExploreData, setSortedExploreData] = useState([])
   const [displayedExploreData, setDisplayedExploreData] = useState([]);
   const [visibleItems, setVisibleItems] = useState(8)
   const loading = displayedExploreData.length === 0;
@@ -46,12 +47,13 @@ const ExploreItems = () => {
         return likesB - likesA   
       })
     }
-    setDisplayedExploreData(sortedExploreData.slice(0, 8));
+    setDisplayedExploreData(sortedExploreData.slice(0, visibleItems));
   }, [exploreData, sortType]);
   
   const loadMore = () => {
+    setSortedExploreData(displayedExploreData)
     setVisibleItems(prev => prev + 4)
-    setDisplayedExploreData(displayedExploreData.slice(0, visibleItems))
+    setDisplayedExploreData(sortedExploreData.slice(0, visibleItems + 4))
   }
   
   useEffect(() => {
