@@ -1,61 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
 import Timer from "../UI/Timer";
 
 const ExploreItems = () => {
-  const [exploreData, setExploreData] = useState([]);
   const [sortType, setSortType] = useState("");
-  const [sortedExploreData, setSortedExploreData] = useState([])
-  const [displayedExploreData, setDisplayedExploreData] = useState([]);
-  const [visibleItems, setVisibleItems] = useState(8)
-  const loading = displayedExploreData.length === 0;
+  const [exploreData, setExploreData] = useState([])
+  const [sortedExploreData, setSortedExploreData] = useState([]);
+  const [visibleItems, setVisibleItems] = useState(8);
+  const displayFull = (visibleItems === exploreData.length);
 
   async function fetchExploreData() {
     try {
       const { data } = await axios.get(
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore`
       );
-      setExploreData(data);
+      setExploreData(data)
+      setSortedExploreData(data);
     } catch (error) {
       console.error("Error fetching api:", error);
-      setExploreData([]);
+      setSortedExploreData([]);
     }
   }
 
   useEffect(() => {
-    let sortedExploreData = [...exploreData];
-    
     if (sortType === "price_high_to_low") {
-      sortedExploreData.sort((a, b) => {
-        const priceA = parseFloat(a.price);
-        const priceB = parseFloat(b.price);
-        return priceB - priceA;
-      });
+      setSortedExploreData((prev) =>
+        [...prev].sort((a, b) => {
+          const priceA = parseFloat(a.price);
+          const priceB = parseFloat(b.price);
+          return priceB - priceA;
+        })
+      );
     } else if (sortType === "price_low_to_high") {
-      sortedExploreData.sort((a, b) => {
-        const priceA = parseFloat(a.price);
-        const priceB = parseFloat(b.price);
-        return priceA - priceB;
-      });
+      setSortedExploreData((prev) =>
+        [...prev].sort((a, b) => {
+          const priceA = parseFloat(a.price);
+          const priceB = parseFloat(b.price);
+          return priceA - priceB;
+        })
+      );
     } else if (sortType === "likes_high_to_low") {
-      sortedExploreData.sort((a, b) => {
-        const likesA = parseInt(a.likes);
-        const likesB = parseInt(b.likes)
-        return likesB - likesA   
-      })
+      setSortedExploreData((prev) =>
+        [...prev].sort((a, b) => {
+          const likesA = parseInt(a.likes);
+          const likesB = parseInt(b.likes);
+          return likesB - likesA;
+        })
+      );
     }
-    setDisplayedExploreData(sortedExploreData.slice(0, visibleItems));
-  }, [exploreData, sortType]);
-  
+  }, [sortType]);
+
   const loadMore = () => {
-    setSortedExploreData(displayedExploreData)
-    setVisibleItems(prev => prev + 4)
-    setDisplayedExploreData(sortedExploreData.slice(0, visibleItems + 4))
-  }
-  
+    setVisibleItems((prev) => prev + 4);
+  };
+
   useEffect(() => {
     fetchExploreData();
   }, []);
@@ -77,7 +76,7 @@ const ExploreItems = () => {
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-      {displayedExploreData.map((displayedExploreData) => (
+      {sortedExploreData.slice(0, visibleItems).map((displayedExploreData) => (
         <div
           key={displayedExploreData.id}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
@@ -90,7 +89,11 @@ const ExploreItems = () => {
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
               >
-                <img className="lazy" src={displayedExploreData.authorImage} alt="" />
+                <img
+                  className="lazy"
+                  src={displayedExploreData.authorImage}
+                  alt=""
+                />
                 <i className="fa fa-check"></i>
               </Link>
             </div>
@@ -125,7 +128,9 @@ const ExploreItems = () => {
               <Link to="/item-details">
                 <h4>{displayedExploreData.title}</h4>
               </Link>
-              <div className="nft__item_price">{displayedExploreData.price}</div>
+              <div className="nft__item_price">
+                {displayedExploreData.price}
+              </div>
               <div className="nft__item_like">
                 <i className="fa fa-heart"></i>
                 <span>{displayedExploreData.likes}</span>
@@ -135,10 +140,20 @@ const ExploreItems = () => {
         </div>
       ))}
       <div className="col-md-12 text-center">
-        <button to="" id="loadmore" className="btn-main lead" onClick={() => {
-          loadMore()}}>
-          Load more
-        </button>
+        {displayFull ? (
+          ""
+        ) : (
+          <button
+            to=""
+            id="loadmore"
+            className="btn-main lead"
+            onClick={() => {
+              loadMore();
+            }}
+          >
+            Load more
+          </button>
+        )}
       </div>
     </>
   );
