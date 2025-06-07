@@ -80,42 +80,40 @@ const ExploreItems = () => {
       </div>
       {loading && (
         <>
-          {sortedExploreData
-            .slice(0, visibleItems)
-            .map((displayedExploreData) => (
-              <div
-                key={displayedExploreData.id}
-                className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
-                style={{ display: "block", backgroundSize: "cover" }}
-              >
-                <div className="nft__item">
-                  <div className="author_list_pp">
-                    <Skeleton height={50} borderRadius={50} />
-                    <i className="fa fa-check"></i>
-                  </div>
-                  <div className="de_countdown">
-                    <Skeleton width={70} borderRadius={50} />
-                  </div>
-                  ;
-                  <div className="nft__item_wrap">
-                    <Skeleton
-                      containerClassName="nft__item_wrap"
-                      width={"100%"}
-                      height={"65%"}
-                      borderRadius={15}
-                    />
-                  </div>
-                  <div className="nft__item_info">
-                    <Skeleton width={100} />
-                    <Skeleton width={50} />
-                    <div className="nft__item_like">
-                      <i className="fa fa-heart"></i>
-                      <Skeleton width={20}/>
-                    </div>
+          {new Array(4).fill(0).map((_, index) => (
+            <div
+              key={index}
+              className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
+              style={{ display: "block", backgroundSize: "cover" }}
+            >
+              <div className="nft__item">
+                <div className="author_list_pp">
+                  <Skeleton height={50} borderRadius={50} />
+                  <i className="fa fa-check"></i>
+                </div>
+                <div className="de_countdown">
+                  <Skeleton width={70} borderRadius={50} />
+                </div>
+                ;
+                <div className="nft__item_wrap">
+                  <Skeleton
+                    containerClassName="nft__item_wrap"
+                    width={"100%"}
+                    height={"65%"}
+                    borderRadius={15}
+                  />
+                </div>
+                <div className="nft__item_info">
+                  <Skeleton width={100} />
+                  <Skeleton width={50} />
+                  <div className="nft__item_like">
+                    <i className="fa fa-heart"></i>
+                    <Skeleton width={20} />
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
         </>
       )}
       {!loading && (
