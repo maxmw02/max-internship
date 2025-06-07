@@ -173,7 +173,7 @@ const ExploreItems = () => {
                       <h4>{displayedExploreData.title}</h4>
                     </Link>
                     <div className="nft__item_price">
-                      {displayedExploreData.price}
+                      {displayedExploreData.price} ETH
                     </div>
                     <div className="nft__item_like">
                       <i className="fa fa-heart"></i>
