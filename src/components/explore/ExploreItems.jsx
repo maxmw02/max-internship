@@ -80,7 +80,7 @@ const ExploreItems = () => {
       </div>
       {loading && (
         <>
-          {new Array(4).fill(0).map((_, index) => (
+          {new Array(8).fill(0).map((_, index) => (
             <div
               key={index}
               className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
