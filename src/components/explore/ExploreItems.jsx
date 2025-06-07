@@ -10,7 +10,7 @@ const ExploreItems = () => {
   const [sortedExploreData, setSortedExploreData] = useState([]);
   const [visibleItems, setVisibleItems] = useState(8);
   const displayFull = visibleItems === exploreData.length;
-  const loading = exploreData === 0;
+  const loading = exploreData.length === 0;
 
   async function fetchExploreData() {
     try {
