@@ -67,12 +67,18 @@ const AuthorItems = () => {
                     </div>
                     <div className="nft__item_info">
                       <Link to="/item-details">
-                        <h4><Skeleton width={"50%"}/></h4>
+                        <h4>
+                          <Skeleton width={"50%"} />
+                        </h4>
                       </Link>
-                      <div className="nft__item_price"><Skeleton width={"25%"}/></div>
+                      <div className="nft__item_price">
+                        <Skeleton width={"25%"} />
+                      </div>
                       <div className="nft__item_like">
                         <i className="fa fa-heart"></i>
-                        <span><Skeleton width={20}/></span>
+                        <span>
+                          <Skeleton width={20} />
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -116,7 +122,7 @@ const AuthorItems = () => {
                           </div>
                         </div>
                       </div>
-                      <Link to="/item-details">
+                      <Link to={`/item-details/${nftData.nftId}`}>
                         <img
                           src={nftData.nftImage}
                           className="lazy nft__item_preview"

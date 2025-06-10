@@ -69,14 +69,19 @@ const NewItems = () => {
                       <Skeleton width={70} borderRadius={50} />
                     </div>
                     <div className="nft__item_wrap">
-                      <Skeleton containerClassName="nft__item_wrap" width={"100%"} height={"65%"} borderRadius={15}/>
+                      <Skeleton
+                        containerClassName="nft__item_wrap"
+                        width={"100%"}
+                        height={"65%"}
+                        borderRadius={15}
+                      />
                     </div>
                     <div className="nft__item_info">
                       <Skeleton width={100} />
                       <Skeleton width={50} />
                       <div className="nft__item_like">
                         <i className="fa fa-heart"></i>
-                        <Skeleton width={20}/>
+                        <Skeleton width={20} />
                       </div>
                     </div>
                   </div>
@@ -104,7 +109,7 @@ const NewItems = () => {
                         <i className="fa fa-check"></i>
                       </Link>
                     </div>
-                    <Timer initialTime={newData.expiryDate}/>
+                    <Timer initialTime={newData.expiryDate} />
                     <div className="nft__item_wrap">
                       <div className="nft__item_extra">
                         <div className="nft__item_buttons">
@@ -123,7 +128,7 @@ const NewItems = () => {
                           </div>
                         </div>
                       </div>
-                      <Link to="/item-details">
+                      <Link to={`/item-details/${newData.nftId}`}>
                         <img
                           src={newData.nftImage}
                           className="lazy nft__item_preview"
