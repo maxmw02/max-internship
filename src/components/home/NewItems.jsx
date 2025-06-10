@@ -52,12 +52,22 @@ const NewItems = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>New Items</h2>
-              <div className="small-border bg-color-2"></div>
+              <h2 data-aos="fade-in" data-aos-duration="500">
+                New Items
+              </h2>
+              <div
+                className="small-border bg-color-2"
+                data-aos="fade-in"
+                data-aos-duration="500"
+              ></div>
             </div>
           </div>
           {loading && (
-            <ReactOwlCarousel {...options}>
+            <ReactOwlCarousel
+              data-aos="fade-in"
+              data-aos-duration="500"
+              {...options}
+            >
               {new Array(4).fill(0).map((_, index) => (
                 <div key={index}>
                   <div className="nft__item">
@@ -90,7 +100,11 @@ const NewItems = () => {
             </ReactOwlCarousel>
           )}
           {!loading && (
-            <ReactOwlCarousel {...options}>
+            <ReactOwlCarousel
+              data-aos="fade-in"
+              data-aos-duration="500"
+              {...options}
+            >
               {newData.map((newData) => (
                 <div key={newData.id}>
                   <div className="nft__item">

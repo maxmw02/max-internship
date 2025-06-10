@@ -86,7 +86,11 @@ const ExploreItems = () => {
               className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
               style={{ display: "block", backgroundSize: "cover" }}
             >
-              <div className="nft__item">
+              <div
+                className="nft__item"
+                data-aos="fade-in"
+                data-aos-duration="500"
+              >
                 <div className="author_list_pp">
                   <Skeleton height={50} borderRadius={50} />
                   <i className="fa fa-check"></i>
@@ -126,7 +130,11 @@ const ExploreItems = () => {
                 className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
                 style={{ display: "block", backgroundSize: "cover" }}
               >
-                <div className="nft__item">
+                <div
+                  className="nft__item"
+                  data-aos="fade-in"
+                  data-aos-duration="500"
+                >
                   <div className="author_list_pp">
                     <Link
                       to={`/author/${displayedExploreData.authorId}`}
@@ -196,6 +204,8 @@ const ExploreItems = () => {
             onClick={() => {
               loadMore();
             }}
+            data-aos="fade-zoom-up"
+            data-aos-duration="800"
           >
             Load more
           </button>
