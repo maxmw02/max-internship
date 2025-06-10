@@ -29,8 +29,14 @@ const TopSellers = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>Top Sellers</h2>
-              <div className="small-border bg-color-2"></div>
+              <h2 data-aos="fade-in" data-aos-duration="500">
+                Top Sellers
+              </h2>
+              <div
+                className="small-border bg-color-2"
+                data-aos="fade-in"
+                data-aos-duration="500"
+              ></div>
             </div>
           </div>
           <div className="col-md-12">
@@ -38,7 +44,11 @@ const TopSellers = () => {
               {loading && (
                 <>
                   {topData.map((topData) => (
-                    <li key={topData.id}>
+                    <li
+                      key={topData.id}
+                      data-aos="fade-in"
+                      data-aos-duration="500"
+                    >
                       <div className="author_list_pp">
                         <Skeleton circle={true} height={50} />
                         <i className="fa fa-check"></i>
@@ -56,7 +66,11 @@ const TopSellers = () => {
               {!loading && (
                 <>
                   {topData.map((topData) => (
-                    <li key={topData.id}>
+                    <li
+                      key={topData.id}
+                      data-aos="fade-in"
+                      data-aos-duration="500"
+                    >
                       <div className="author_list_pp">
                         <Link to={`/author/${topData.authorId}`}>
                           <img

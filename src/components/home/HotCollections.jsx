@@ -54,12 +54,23 @@ const HotCollections = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>Hot Collections</h2>
-              <div className="small-border bg-color-2"></div>
+              <h2 data-aos="fade-in" data-aos-duration="500">
+                Hot Collections
+              </h2>
+              <div
+                className="small-border bg-color-2"
+                data-aos="fade-in"
+                data-aos-duration="500"
+              ></div>
             </div>
           </div>
           {loading && (
-            <ReactOwlCarousel className="owl-theme" {...options}>
+            <ReactOwlCarousel
+              className="owl-theme"
+              data-aos="fade-in"
+              data-aos-duration="500"
+              {...options}
+            >
               {new Array(4).fill(0).map((_, index) => (
                 <div key={index}>
                   <div className="nft_coll">
@@ -80,7 +91,12 @@ const HotCollections = () => {
             </ReactOwlCarousel>
           )}
           {!loading && (
-            <ReactOwlCarousel className="owl-theme" {...options}>
+            <ReactOwlCarousel
+              className="owl-theme"
+              data-aos="fade-in"
+              data-aos-duration="500"
+              {...options}
+            >
               {hotData.map((hotData) => (
                 <div key={hotData.id}>
                   <div className="nft_coll">
